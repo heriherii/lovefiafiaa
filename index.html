@@ -1,0 +1,345 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dari Heri Untuk Fia</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --primary-color: #ff4d6d;
+    --secondary-color: #ff8fa3;
+    --text-color: #590d22;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.envelope-container {
+    position: relative;
+    cursor: pointer;
+}
+
+.envelope {
+    width: 300px;
+    height: 200px;
+    background: #ff4d6d;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.flap {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 110px solid #ff758f;
+    top: 0;
+    left: 0;
+    transform-origin: top;
+    transition: transform 0.6s ease;
+    z-index: 3;
+}
+
+.pocket {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 200px solid #ff4d6d;
+    bottom: 0;
+}
+
+.letter-preview {
+    width: 260px;
+    height: 180px;
+    background: white;
+    position: absolute;
+    bottom: 0;
+    left: 20px;
+    border-radius: 5px;
+    transition: transform 0.8s ease;
+}
+
+.envelope-container.open .flap {
+    transform: rotateX(180deg);
+}
+
+.envelope-container.open .letter-preview {
+    transform: translateY(-100px);
+}
+
+
+#letter-view {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+#letter-view.active {
+    display: flex;
+}
+
+.love-letter {
+    background: white;
+    width: 95%;
+    max-width: 600px;
+    height: 80vh;
+    padding: 25px;
+    border-radius: 10px;
+    overflow-y: auto;
+    font-family: "Dancing Script", cursive;
+    position: relative;
+}
+
+.love-letter h2 {
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.typing-text {
+    font-size: 1.5rem;
+    line-height: 1.8;
+    white-space: pre-wrap;
+    border-right: 2px solid var(--primary-color);
+    animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+
+@media (max-width:768px) {
+    .envelope {
+        width: 90vw;
+        height: 60vw;
+    }
+
+    .flap {
+        border-left: 45vw solid transparent;
+        border-right: 45vw solid transparent;
+        border-top: 33vw solid #ff758f;
+    }
+
+    .pocket {
+        border-left: 45vw solid transparent;
+        border-right: 45vw solid transparent;
+        border-bottom: 60vw solid #ff4d6d;
+    }
+
+    .letter-preview {
+        width: 80%;
+        left: 10%;
+        height: 85%;
+    }
+
+    .love-letter h2 {
+        font-size: 2rem;
+    }
+
+    .typing-text {
+        font-size: 1.2rem;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bg-music" loop>
+    <source src="heri.mp3" type="audio/mpeg">
+</audio>
+
+
+<div class="envelope-container" id="envelope" onclick="openEnvelope()">
+    <div class="envelope">
+        <div class="pocket"></div>
+        <div class="letter-preview"></div>
+        <div class="flap"></div>
+    </div>
+</div>
+
+
+<div id="letter-view">
+    <div class="love-letter">
+        <button class="close-btn" onclick="closeLetter()">×</button>
+        <h2>Dear Fia ❤️</h2>
+        <div id="typing-text" class="typing-text"></div>
+    </div>
+</div>
+
+<script>
+const text = `Hai Fia...
+
+Selamat Wisuda Yaa, Semoga ilmu yang didapat selama kuliah bermanfaat bagi kamu, aku bangga sama kamu udah berhasil sampai di titik ini, udah jadi fia yang aku kenal dari dulu sampe sekarang, udah jadi orang baik untuk orang-orang sekitar, udah jadi anak yang baik dan pasti membanggakan..
+
+Jujur, aku nggak pernah benar-benar tahu bagaimana cara menyampaikan semuanya dengan sempurna. Kadang ada banyak hal yang tersimpan di kepala, banyak rasa yang tinggal di hati, tapi semuanya terasa terlalu besar untuk dijelaskan hanya dengan beberapa kalimat sederhana.
+
+Tapi lewat surat kecil ini, aku mau mencoba.
+
+Aku mau bilang terima kasih.
+
+Terima kasih karena sudah hadir.
+Terima kasih karena tanpa sadar kamu membawa banyak warna ke dalam hidupku.
+Mungkin buat sebagian orang, kehadiran seseorang itu hal biasa.
+Tapi buatku, kehadiranmu itu berbeda.
+
+Ada sesuatu yang berubah sejak aku mengenalmu.
+
+Hari-hariku yang biasanya terasa biasa saja, perlahan jadi punya makna lebih.
+Hal-hal kecil yang dulu terasa sepele, sekarang jadi terasa spesial.
+Sebuah pesan singkat darimu bisa bikin hariku lebih baik.
+Sebuah tawa kecilmu bisa bikin pikiranku lebih tenang.
+Dan keberadaanmu, entah kenapa, selalu berhasil membuat dunia terasa sedikit lebih hangat.
+
+Aku sering berpikir...
+bagaimana bisa seseorang punya pengaruh sebesar itu dalam hidup orang lain?
+
+Dan jawabannya selalu kembali ke kamu.
+
+Mungkin kamu nggak sadar,
+tapi ada banyak hal tentangmu yang aku kagumi.
+
+Cara kamu berbicara,
+cara kamu berpikir,
+cara kamu menghadapi banyak hal,
+bahkan cara kamu diam sekalipun.
+
+Semua itu punya tempat sendiri di pikiranku.
+
+Aku suka bagaimana kamu menjadi dirimu sendiri.
+Tanpa harus menjadi orang lain.
+Tanpa harus berpura-pura.
+Dan justru itu yang membuatmu begitu berharga.
+
+Di dunia yang penuh kepalsuan ini,
+menemukan seseorang yang tulus itu langka.
+
+Dan aku bersyukur bisa mengenalmu.
+
+Kadang aku bertanya-tanya,
+apa kamu tahu seberapa penting dirimu buatku?
+
+Karena mungkin aku nggak selalu menunjukkan.
+Mungkin aku nggak selalu bilang.
+Mungkin aku sering terlihat biasa saja.
+
+Tapi kenyataannya...
+
+kamu punya tempat yang besar di hatiku.
+
+Lebih besar dari yang mungkin kamu kira.
+
+Ada banyak malam di mana aku memikirkanmu.
+Mengingat percakapan kecil kita.
+Mengingat candaan sederhana.
+Mengingat hal-hal random yang mungkin buatmu nggak penting,
+tapi buatku cukup untuk membuatku tersenyum sendiri.
+
+Lucu ya...
+
+bagaimana seseorang bisa menjadi alasan bahagia hanya dengan keberadaannya.
+
+Dan kamu adalah salah satu alasan itu.
+
+Aku nggak tahu bagaimana masa depan akan berjalan.
+Aku nggak tahu jalan hidup akan membawa kita ke mana.
+
+Tapi satu hal yang aku tahu...
+
+aku bersyukur pernah, dan masih, berjalan di bagian hidup yang sama denganmu.
+
+Aku harap hidup selalu baik padamu.
+
+Jaga dirimu baik-baik.
+
+Sampai kapan pun,
+akan selalu ada bagian dari hatiku
+yang menyimpan namamu dengan hangat.
+
+Heri❤️Fia`;
+
+let i = 0;
+let typingTimeout;
+
+function openEnvelope() {
+    const env = document.getElementById("envelope");
+    const letterView = document.getElementById("letter-view");
+    const music = document.getElementById("bg-music");
+
+    env.classList.add("open");
+    music.play();
+
+    setTimeout(() => {
+        letterView.classList.add("active");
+
+        i = 0;
+        document.getElementById("typing-text").innerHTML = "";
+        clearTimeout(typingTimeout);
+
+        typeWriter();
+    }, 1200);
+}
+
+function closeLetter() {
+    document.getElementById("letter-view").classList.remove("active");
+
+    const music = document.getElementById("bg-music");
+    music.pause();
+    music.currentTime = 0;
+
+    clearTimeout(typingTimeout);
+}
+
+function typeWriter() {
+    const target = document.getElementById("typing-text");
+
+    if (i < text.length) {
+        target.innerHTML += text.charAt(i);
+        i++;
+
+        // auto scroll while typing
+        target.parentElement.scrollTop = target.parentElement.scrollHeight;
+        typingTimeout = setTimeout(typeWriter, 80);
+    }
+}
+</script>
+
+</body>
+</html>
